@@ -84,12 +84,12 @@ type PublicMinerAPI struct {
 
 // NewPublicMinerAPI create a new PublicMinerAPI instance.
 func NewPublicMinerAPI(e *Ethereum) *PublicMinerAPI {
-	agent := miner.NewRemoteAgent(e.BlockChain(), e.Engine())
-	if e.Miner() != nil {
-		e.Miner().Register(agent)
-	}
+	// agent := miner.NewRemoteAgent(e.BlockChain(), e.Engine())
+	// if e.Miner() != nil {
+	// 	e.Miner().Register(agent)
+	// }
 
-	return &PublicMinerAPI{e, agent}
+	return &PublicMinerAPI{e}
 }
 
 // Mining returns an indication if this node is currently mining.

@@ -101,8 +101,8 @@ func (s *Ethereum) AddLesServer(ls LesServer) {
 
 // New creates a new Ethereum object (including the
 // initialisation of the common Ethereum object)
-func New(ctx *node.ServiceContext, config *Config, 
-pending miner.Pending) (*Ethereum, error) {
+func New(ctx *node.ServiceContext, config *Config,
+	pending miner.Pending) (*Ethereum, error) {
 	if config.SyncMode == downloader.LightSync {
 		return nil, errors.New("can't run eth.Ethereum in light sync mode, use les.LightEthereum")
 	}
@@ -178,12 +178,12 @@ pending miner.Pending) (*Ethereum, error) {
 	}
 
 	if pending == nil {
-		eth.miner = miner.New(eth, eth.chainConfig, eth.EventMux(), eth.engine)
-		eth.miner.SetExtra(makeExtraData(config.ExtraData))
+		eth.miner = miner.New(eth, eth.chainConfig, eth.EventMux(), eth.engine, config.MinerRecommit, config.MinerGasFloor, config.MinerGasCeil, eth.isLocalBlock)
+		eth.miner.SetExtra(makeExtraData(config.MinerExtraData))
 		pending = eth.miner
 	}
 
-	eth.ApiBackend = &EthApiBackend{eth, nil, pending}
+	eth.APIBackend = &EthAPIBackend{eth, nil, pending}
 	gpoParams := config.GPO
 	if gpoParams.Default == nil {
 		gpoParams.Default = config.MinerGasPrice

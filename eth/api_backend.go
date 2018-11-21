@@ -37,8 +37,8 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 )
 
-// EthApiBackend implements ethapi.Backend for full nodes
-type EthApiBackend struct {
+// EthAPIBackend implements ethapi.Backend for full nodes
+type EthAPIBackend struct {
 	eth     *Ethereum
 	gpo     *gasprice.Oracle
 	pending miner.Pending
