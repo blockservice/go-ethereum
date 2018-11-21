@@ -254,12 +254,12 @@ func (ethash *Ethash) verifyHeader(chain consensus.ChainReader, header, parent *
 	if header.Time.Cmp(parent.Time) <= 0 {
 		return errZeroBlockTime
 	}
-	// Verify the block's difficulty based in it's timestamp and parent's difficulty
-	expected := ethash.CalcDifficulty(chain, header.Time.Uint64(), parent)
+	// // Verify the block's difficulty based in it's timestamp and parent's difficulty
+	// expected := ethash.CalcDifficulty(chain, header.Time.Uint64(), parent)
 
-	if expected.Cmp(header.Difficulty) != 0 {
-		return fmt.Errorf("invalid difficulty: have %v, want %v", header.Difficulty, expected)
-	}
+	// if expected.Cmp(header.Difficulty) != 0 {
+	// 	return fmt.Errorf("invalid difficulty: have %v, want %v", header.Difficulty, expected)
+	// }
 	// Verify that the gas limit is <= 2^63-1
 	cap := uint64(0x7fffffffffffffff)
 	if header.GasLimit > cap {
